@@ -46,6 +46,31 @@ table {
   border-collapse: collapse;
   border-spacing: 0; }
 
+main > nav {
+  margin: 1rem; }
+  main > nav li {
+    position: relative; }
+    main > nav li a {
+      width: 100%;
+      display: inline-block;
+      color: #333;
+      text-decoration: none;
+      transition: background-color 0.3s;
+      text-align: center; }
+      main > nav li a .icon, main > nav li a h2 {
+        display: block; }
+      main > nav li a .icon {
+        font-size: 6rem;
+        padding: 5rem 5rem; }
+      main > nav li a h2 {
+        font-family: Lora, serif;
+        font-weight: 400;
+        font-color: #333;
+        font-size: 2rem;
+        padding: 1rem; }
+      main > nav li a:hover {
+        background-color: #e6e6e6; }
+
 body > header {
   background-color: #162855;
   padding: 1rem; }
@@ -62,5 +87,45 @@ body > header {
       font-color: #fff;
       font-size: 2rem;
       letter-spacing: -2px; }
+
+.books {
+  margin-left: 4rem;
+  padding: 1rem; }
+  .books h2 {
+    font-family: Lora, serif;
+    font-weight: 400;
+    font-color: #333;
+    font-size: 2rem;
+    margin-bottom: 1rem; }
+  .books .book {
+    display: flex;
+    flex-flow: row wrap; }
+    .books .book:not(:last-child) {
+      margin-bottom: 1rem; }
+    .books .book figure {
+      position: relative;
+      max-width: 130px; }
+      .books .book figure img {
+        width: 100%; }
+    .books .book .details {
+      max-width: 400px;
+      margin-left: 1rem; }
+      .books .book .details h3 {
+        font-family: Lora, serif;
+        font-weight: 700;
+        font-color: #333;
+        font-size: 1rem; }
+      .books .book .details .genre {
+        font-family: Lora, serif;
+        font-weight: 400;
+        font-color: #333;
+        font-size: 1rem;
+        font-style: italic; }
+      .books .book .details p {
+        margin-top: 1rem;
+        font-family: Lora, serif;
+        font-weight: 400;
+        font-color: #333;
+        font-size: 1rem; }
 
 /*# sourceMappingURL=style.css.map */
