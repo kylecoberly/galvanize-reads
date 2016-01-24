@@ -166,6 +166,7 @@ body > header {
         font-weight: 400;
         font-color: #333;
         font-size: 1rem; }
+<<<<<<< HEAD
   .books .add {
     display: inline-block;
     padding: 2rem 3rem;
@@ -180,5 +181,7 @@ body > header {
     transition: background-color 0.3s; }
     .books .add:hover {
       background-color: #30898d; }
+=======
+>>>>>>> dfdfa88f5bab821663a17d6d4f3a3d7211b23862
 
 /*# sourceMappingURL=style.css.map */
