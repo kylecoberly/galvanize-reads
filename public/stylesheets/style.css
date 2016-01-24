@@ -159,6 +159,10 @@ body > header {
         font-weight: 700;
         font-color: #333;
         font-size: 1rem; }
+        .books .book .details h3 a {
+          color: #061539; }
+          .books .book .details h3 a:visited {
+            color: #7886AB; }
       .books .book .details .genre {
         font-family: Lora, serif;
         font-weight: 400;

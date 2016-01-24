@@ -24,6 +24,12 @@
             margin-left: 1rem;
             h3 {
                 @include subheader-text;
+                a {
+                    color: $darkest-color;
+                    &:visited {
+                        color: $lighter-color;
+                    }
+                }
             }
             .genre {
                 @include body-text;

@@ -2,6 +2,12 @@ var express = require("express");
 var router = express.Router();
 var databaseConnection = require("../database_connection");
 
+router.get("/:id", function(request, response, next) {
+    databaseConnection("book").select().where("id", request.params.id).then(function(books){
+        response.render("get_book", {book: books[0]});
+    });
+});
+
 router.get("/", function(request, response, next) {
     databaseConnection("book").select().then(function(books){
         response.render("list_books", {books: books});
