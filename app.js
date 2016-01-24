@@ -4,6 +4,7 @@ var favicon = require("serve-favicon");
 var logger = require("morgan");
 var cookieParser = require("cookie-parser");
 var bodyParser = require("body-parser");
+var expressValidator = require("express-validator");
 
 var routes = require("./routes/index");
 var books = require("./routes/books");
@@ -19,6 +20,13 @@ app.set("view engine", "hbs");
 app.use(logger("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(expressValidator({
+    customValidators: {
+        isUrl: function(value){
+            return /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/.test(value);
+        }
+    }
+}));
 app.use(cookieParser());
 app.use(require("node-sass-middleware")({
     src: path.join(__dirname, "public"),

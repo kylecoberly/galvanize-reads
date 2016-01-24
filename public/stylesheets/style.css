@@ -46,22 +46,61 @@ table {
   border-collapse: collapse;
   border-spacing: 0; }
 
+form {
+  font-family: Lora, serif;
+  font-weight: 400;
+  font-color: #333;
+  font-size: 1rem;
+  padding: 1rem;
+  max-width: 600px;
+  box-sizing: border-box;
+  margin-left: 3rem; }
+  form h2 {
+    font-family: Lora, serif;
+    font-weight: 400;
+    font-color: #333;
+    font-size: 2rem;
+    margin-bottom: 1rem; }
+  form input, form textarea {
+    display: block;
+    width: 100%;
+    font-size: 2rem; }
+    form input:not(:last-child), form textarea:not(:last-child) {
+      margin-bottom: 1rem; }
+  form input[type=submit] {
+    font-family: Lora, serif;
+    font-weight: 700;
+    font-color: #333;
+    font-size: 1rem;
+    font-size: 2rem;
+    background-color: #236467;
+    color: #fff;
+    padding: 1rem;
+    border: none;
+    transition: background-color 0.3s;
+    cursor: pointer; }
+    form input[type=submit]:hover {
+      background-color: #30898d; }
+  form textarea {
+    resize: none;
+    height: 10rem; }
+
 main > nav {
   margin: 1rem; }
   main > nav li {
     position: relative; }
     main > nav li a {
-      width: 100%;
       display: inline-block;
+      width: 100%;
       color: #333;
       text-decoration: none;
-      transition: background-color 0.3s;
-      text-align: center; }
+      text-align: center;
+      transition: background-color 0.3s; }
       main > nav li a .icon, main > nav li a h2 {
         display: block; }
       main > nav li a .icon {
-        font-size: 6rem;
-        padding: 5rem 5rem; }
+        padding: 5rem 5rem;
+        font-size: 6rem; }
       main > nav li a h2 {
         font-family: Lora, serif;
         font-weight: 400;
@@ -127,5 +166,19 @@ body > header {
         font-weight: 400;
         font-color: #333;
         font-size: 1rem; }
+  .books .add {
+    display: inline-block;
+    padding: 2rem 3rem;
+    background: #236467;
+    font-family: Lora, serif;
+    font-weight: 700;
+    font-color: #333;
+    font-size: 1rem;
+    font-size: 2rem;
+    text-decoration: none;
+    color: #fff;
+    transition: background-color 0.3s; }
+    .books .add:hover {
+      background-color: #30898d; }
 
 /*# sourceMappingURL=style.css.map */

@@ -1,3 +1,4 @@
-<h1>{{message}}</h1>
-<h2>{{error.status}}</h2>
-<pre>{{error.stack}}</pre>
+<h2>Error!</h2>
+{{#each errors}}
+    <p>Invalid message for {{param}}: {{value}}. Message: {{msg}}</p>
+{{/each}}

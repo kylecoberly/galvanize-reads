@@ -1,0 +1,38 @@
+form {
+    @include body-text;
+    padding: 1rem;
+    max-width: 600px;
+    box-sizing: border-box;
+    margin-left: 3rem;
+    h2 {
+        @include header-text;
+        margin-bottom: 1rem;
+    }
+    input, textarea {
+        display: block;
+        width: 100%;
+        font-size: 2rem;
+        &:not(:last-child){
+            margin-bottom: 1rem;
+        }
+    }
+    input {
+        &[type=submit] {
+            @include subheader-text;
+            font-size: 2rem;
+            background-color: $create-color;
+            color: $white;
+            padding: 1rem;
+            border: none;
+            transition: background-color 0.3s;
+            cursor: pointer;
+            &:hover {
+                background-color: lighten($create-color, 10%);
+            }
+        }
+    }
+    textarea {
+        resize: none;
+        height: 10rem;
+    }
+}
