@@ -63,4 +63,44 @@ body > header {
       font-size: 2rem;
       letter-spacing: -2px; }
 
+.books {
+  margin-left: 4rem;
+  padding: 1rem; }
+  .books h2 {
+    font-family: Lora, serif;
+    font-weight: 400;
+    font-color: #333;
+    font-size: 2rem;
+    margin-bottom: 1rem; }
+  .books .book {
+    display: flex;
+    flex-flow: row wrap; }
+    .books .book:not(:last-child) {
+      margin-bottom: 1rem; }
+    .books .book figure {
+      position: relative;
+      max-width: 130px; }
+      .books .book figure img {
+        width: 100%; }
+    .books .book .details {
+      max-width: 400px;
+      margin-left: 1rem; }
+      .books .book .details h3 {
+        font-family: Lora, serif;
+        font-weight: 700;
+        font-color: #333;
+        font-size: 1rem; }
+      .books .book .details .genre {
+        font-family: Lora, serif;
+        font-weight: 400;
+        font-color: #333;
+        font-size: 1rem;
+        font-style: italic; }
+      .books .book .details p {
+        margin-top: 1rem;
+        font-family: Lora, serif;
+        font-weight: 400;
+        font-color: #333;
+        font-size: 1rem; }
+
 /*# sourceMappingURL=style.css.map */

@@ -15,6 +15,13 @@
     font-size: 2rem;
 }
 
+@mixin subheader-text {
+    font-family: Lora, serif;
+    font-weight: 700;
+    font-color: $black;
+    font-size: 1rem;
+}
+
 @mixin body-text {
     font-family: Lora, serif;
     font-weight: 400;

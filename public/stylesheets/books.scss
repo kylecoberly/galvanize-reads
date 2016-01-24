@@ -1,0 +1,37 @@
+.books {
+    margin-left: 4rem;
+    padding: 1rem;
+    h2 {
+        @include header-text;
+        margin-bottom: 1rem;
+    }
+    .book {
+        display: flex;
+        flex-flow: row wrap;
+        &:not(:last-child) {
+            margin-bottom: 1rem;
+        }
+        figure {
+            position: relative;
+            max-width: 130px;
+            img {
+                width: 100%;
+            }
+        }
+        .details {
+            max-width: 400px;
+            margin-left: 1rem;
+            h3 {
+                @include subheader-text;
+            }
+            .genre {
+                @include body-text;
+                font-style: italic;
+            }
+            p {
+                margin-top: 1rem;
+                @include body-text;
+            }
+        }
+    }
+}
