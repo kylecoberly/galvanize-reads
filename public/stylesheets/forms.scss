@@ -30,6 +30,12 @@ form {
                 background-color: lighten($create-color, 10%);
             }
         }
+        &.delete {
+            background-color: $delete-color;
+            &:hover {
+                background-color: lighten($delete-color, 10%);
+            }
+        }
     }
     textarea {
         resize: none;

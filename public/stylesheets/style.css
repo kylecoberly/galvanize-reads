@@ -81,6 +81,10 @@ form {
     cursor: pointer; }
     form input[type=submit]:hover {
       background-color: #30898d; }
+  form input.delete {
+    background-color: #b34d4d; }
+    form input.delete:hover {
+      background-color: #c27070; }
   form textarea {
     resize: none;
     height: 10rem; }
@@ -147,8 +151,11 @@ body > header {
       .books .book figure img {
         width: 100%; }
     .books .book .details {
+      position: relative;
       max-width: 400px;
-      margin-left: 1rem; }
+      margin-left: 1rem;
+      transform: scale(1);
+      transition: transform 0.3s; }
       .books .book .details h3 {
         font-family: Lora, serif;
         font-weight: 700;
@@ -166,6 +173,15 @@ body > header {
         font-weight: 400;
         font-color: #333;
         font-size: 1rem; }
+      .books .book .details .delete {
+        position: absolute;
+        top: 0;
+        right: 0;
+        color: #b34d4d;
+        font-size: 2rem;
+        cursor: pointer; }
+        .books .book .details .delete:hover {
+          transform: scale(1.2); }
   .books .add {
     display: inline-block;
     padding: 2rem 3rem;

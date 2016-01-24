@@ -5,6 +5,7 @@ var logger = require("morgan");
 var cookieParser = require("cookie-parser");
 var bodyParser = require("body-parser");
 var expressValidator = require("express-validator");
+var methodOverride = require("method-override");
 
 var routes = require("./routes/index");
 var books = require("./routes/books");
@@ -23,11 +24,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressValidator({
     customValidators: {
         isUrl: function(value){
-            console.log(value, /[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/.test(value));
             return /[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/.test(value);
         }
     }
 }));
+app.use(methodOverride("_method"));
 app.use(cookieParser());
 app.use(require("node-sass-middleware")({
     src: path.join(__dirname, "public"),

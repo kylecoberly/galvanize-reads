@@ -12,6 +12,12 @@ router.get("/new", function(request, response, next) {
     response.render("add_book");
 });
 
+router.get("/delete/:id", function(request, response, next) {
+    databaseConnection("book").select().where("id", request.params.id).then(function(books){
+        response.render("delete_book", {book: books[0]});
+    });
+});
+
 router.post("/", function(request, response, next) {
     request.checkBody("title", "Title is empty or too long").notEmpty().isLength({max: 255});
     request.checkBody("genre", "Genre is empty or too long").notEmpty().isLength({max: 255});
@@ -31,6 +37,13 @@ router.post("/", function(request, response, next) {
             response.redirect("/books");
         });
     }
+});
+
+router.delete("/:id", function(request, response, next) {
+    console.log("got to delete");
+    databaseConnection("book").del().where("id", request.params.id).then(function(){
+        response.redirect("/books");
+    });
 });
 
 module.exports = router;

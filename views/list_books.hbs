@@ -10,9 +10,10 @@
                     <h3>{{title}}</h3>
                     <span class="genre">{{genre}}</span>
                     <p>{{description}}</p>
+                    <a href="/books/delete/{{id}}"><i class="delete fa fa-remove"></i></a>
                 </div>
             </li>
         {{/each}}
     </ul>
-    <a class="add" href="books/new">Add a Book</a>
+    <a class="add" href="/books/new">Add a Book</a>
 </section>

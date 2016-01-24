@@ -19,8 +19,11 @@
             }
         }
         .details {
+            position: relative;
             max-width: 400px;
             margin-left: 1rem;
+            transform: scale(1);
+            transition: transform 0.3s;
             h3 {
                 @include subheader-text;
             }
@@ -32,7 +35,19 @@
                 margin-top: 1rem;
                 @include body-text;
             }
+            .delete {
+                position: absolute;
+                top: 0;
+                right: 0;
+                color: $delete-color;
+                font-size: 2rem;
+                cursor: pointer;
+                &:hover {
+                    transform: scale(1.2);
+                }
+            }
         }
+
     }
     .add {
         display: inline-block;
