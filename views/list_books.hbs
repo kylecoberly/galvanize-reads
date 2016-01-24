@@ -10,7 +10,10 @@
                     <h3>{{title}}</h3>
                     <span class="genre">{{genre}}</span>
                     <p>{{description}}</p>
-                    <a href="/books/delete/{{id}}"><i class="delete fa fa-remove"></i></a>
+                    <div class="actions">
+                        <a href="/books/edit/{{id}}"><i class="edit fa fa-pencil"></i></a>
+                        <a href="/books/delete/{{id}}"><i class="delete fa fa-remove"></i></a>
+                    </div>
                 </div>
             </li>
         {{/each}}

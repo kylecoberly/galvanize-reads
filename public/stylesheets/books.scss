@@ -22,8 +22,6 @@
             position: relative;
             max-width: 400px;
             margin-left: 1rem;
-            transform: scale(1);
-            transition: transform 0.3s;
             h3 {
                 @include subheader-text;
             }
@@ -35,15 +33,24 @@
                 margin-top: 1rem;
                 @include body-text;
             }
-            .delete {
+            .actions {
                 position: absolute;
                 top: 0;
                 right: 0;
-                color: $delete-color;
                 font-size: 2rem;
                 cursor: pointer;
-                &:hover {
-                    transform: scale(1.2);
+                transform: scale(1);
+                transition: transform 0.3s;
+                .delete, .edit {
+                    &:hover {
+                        transform: scale(1.2);
+                    }
+                }
+                .delete {
+                    color: $delete-color;
+                }
+                .edit {
+                    color: $light-color;
                 }
             }
         }

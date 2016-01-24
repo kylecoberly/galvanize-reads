@@ -18,6 +18,12 @@ router.get("/delete/:id", function(request, response, next) {
     });
 });
 
+router.get("/edit/:id", function(request, response, next) {
+    databaseConnection("book").select().where("id", request.params.id).then(function(books){
+        response.render("edit_book", {book: books[0]});
+    });
+});
+
 router.post("/", function(request, response, next) {
     request.checkBody("title", "Title is empty or too long").notEmpty().isLength({max: 255});
     request.checkBody("genre", "Genre is empty or too long").notEmpty().isLength({max: 255});
@@ -34,6 +40,27 @@ router.post("/", function(request, response, next) {
             description: request.body.description,
             cover_url: request.body.cover_image_url
         }).then(function(){
+            response.redirect("/books");
+        });
+    }
+});
+
+router.put("/:id", function(request, response, next) {
+    request.checkBody("title", "Title is empty or too long").notEmpty().isLength({max: 255});
+    request.checkBody("genre", "Genre is empty or too long").notEmpty().isLength({max: 255});
+    request.checkBody("description", "Description is missing or too long").notEmpty().isLength({max: 10000});
+    request.checkBody("cover_image_url", "Not a URL").isUrl(request.body.cover_url);
+
+    var errors = request.validationErrors();
+    if (errors){
+        response.render("error", {errors: errors});
+    } else {
+        databaseConnection("book").update({
+            title: request.body.title,
+            genre: request.body.genre,
+            description: request.body.description,
+            cover_url: request.body.cover_image_url
+        }).where("id", request.params.id).then(function(){
             response.redirect("/books");
         });
     }
