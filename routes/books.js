@@ -26,7 +26,7 @@ router.post("/", function(request, response, next) {
             title: request.body.title,
             genre: request.body.genre,
             description: request.body.description,
-            cover_url: request.body.cover_url
+            cover_url: request.body.cover_image_url
         }).then(function(){
             response.redirect("/books");
         });
