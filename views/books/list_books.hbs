@@ -10,7 +10,7 @@
                     <h3><a href="/books/{{id}}">{{title}}</a></h3>
                     <ul class="authors">
                         {{#each authors}}
-                            <li>{{first_name}} {{last_name}}</li>
+                            <li><a href="/authors/{{id}}">{{first_name}} {{last_name}}</a></li>
                         {{/each}}
                     </ul>
                     <span class="genre">{{genre}}</span>
