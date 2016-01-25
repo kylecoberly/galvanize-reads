@@ -14,7 +14,6 @@ router.get("/:id", function(request, response, next) {
         .where("book.id", request.params.id)
     .then(function(books){
         var books = mapAuthorsToBooks(books);
-        console.log(books[0]);
         response.render("books/get_book", {layout: "books_layout", book: books[0]});
     });
 });
@@ -30,7 +29,6 @@ router.get("/", function(request, response, next) {
     });
 });
 
-
 router.get("/delete/:id", function(request, response, next) {
     databaseConnection("book")
         .select()
@@ -44,13 +42,32 @@ router.get("/delete/:id", function(request, response, next) {
 });
 
 router.get("/edit/:id", function(request, response, next) {
-    databaseConnection("book")
-        .select()
-        .innerJoin("book_author", "book.id", "book_id")
-        .innerJoin("author", "author_id", "author.id")
-        .where("book.id", request.params.id)
-    .then(function(books){
-        response.render("books/edit_book", {layout: "books_layout", book: books[0]});
+    Promise.all([
+        databaseConnection("book").select()
+            .innerJoin("book_author", "book.id", "book_id")
+            .innerJoin("author", "author_id", "author.id")
+            .where("book.id", request.params.id),
+        databaseConnection("author").select()
+    ]).then(function(results){
+        var books = mapAuthorsToBooks(results[0]);
+        response.render("books/edit_book", {layout: "books_layout", book: books[0], authors: results[1]});
+    });
+});
+
+router.post("/:book_id/authors", function(request, response, next) {
+    databaseConnection("book_author").insert({
+        book_id: parseInt(request.params.book_id),
+        author_id: parseInt(request.body.author_id)
+    }).then(function(){
+        response.redirect("/books");
+    });
+});
+router.delete("/:book_id/authors/:author_id", function(request, response, next) {
+    databaseConnection("book_author").delete().where({
+        book_id: parseInt(request.params.book_id),
+        author_id: parseInt(request.params.author_id)
+    }).then(function(){
+        response.redirect("/books");
     });
 });
 

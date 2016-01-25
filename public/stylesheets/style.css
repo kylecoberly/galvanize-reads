@@ -51,22 +51,23 @@ main {
   padding-top: 65px;
   margin-top: -65px; }
 
-form {
+h2 {
   font-family: Lora, serif;
   font-weight: 400;
   color: #333;
-  font-size: 1rem;
+  font-size: 2rem;
+  margin-bottom: 1rem; }
+
+form {
   padding: 1rem;
   max-width: 600px;
   box-sizing: border-box;
   margin-left: 3rem; }
-  form h2 {
+  form input, form textarea {
     font-family: Lora, serif;
     font-weight: 400;
     color: #333;
-    font-size: 2rem;
-    margin-bottom: 1rem; }
-  form input, form textarea {
+    font-size: 1rem;
     display: block;
     width: 100%;
     font-size: 2rem; }
@@ -93,6 +94,56 @@ form {
   form textarea {
     resize: none;
     height: 10rem; }
+
+.add {
+  display: inline-block;
+  padding: 2rem 3rem;
+  background: #236467;
+  font-family: Lora, serif;
+  font-weight: 700;
+  color: #333;
+  font-size: 1rem;
+  font-size: 2rem;
+  text-decoration: none;
+  color: #fff;
+  transition: background-color 0.3s; }
+  .add:hover {
+    background-color: #30898d; }
+
+.remove-item {
+  margin-left: 4rem;
+  margin-bottom: 2rem;
+  margin-top: 2rem; }
+  .remove-item li:nth-child(odd) {
+    background-color: #f2f2f2; }
+  .remove-item li:nth-child(even) {
+    background-color: #d9d9d9; }
+  .remove-item li form {
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.5rem;
+    font-style: italic; }
+    .remove-item li form button {
+      border: none;
+      background-color: transparent; }
+      .remove-item li form button .delete {
+        color: #b34d4d;
+        transition: transform 0.3s;
+        font-size: 1.5rem; }
+        .remove-item li form button .delete:hover {
+          transform: scale(1.2); }
+
+.add-item select {
+  background-color: #fff;
+  font-family: Lora, serif;
+  font-weight: 400;
+  color: #333;
+  font-size: 1rem;
+  font-size: 1.5rem;
+  font-style: italic;
+  width: 100%;
+  margin-bottom: 1rem; }
 
 main {
   display: flex;
@@ -255,19 +306,5 @@ body > header {
           color: #b34d4d; }
         .books .book .details .actions .edit, .books .author .details .actions .edit, .authors .book .details .actions .edit, .authors .author .details .actions .edit {
           color: #4F618E; }
-  .books .add, .authors .add {
-    display: inline-block;
-    padding: 2rem 3rem;
-    background: #236467;
-    font-family: Lora, serif;
-    font-weight: 700;
-    color: #333;
-    font-size: 1rem;
-    font-size: 2rem;
-    text-decoration: none;
-    color: #fff;
-    transition: background-color 0.3s; }
-    .books .add:hover, .authors .add:hover {
-      background-color: #30898d; }
 
 /*# sourceMappingURL=style.css.map */

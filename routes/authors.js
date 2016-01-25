@@ -24,7 +24,6 @@ router.get("/", function(request, response, next) {
         .leftOuterJoin("book_author", "author.id", "author_id")
         .leftOuterJoin("book", "book_id", "book.id")
     .then(function(records){
-        console.log(records);
         var authors = mapBooksToAuthors(records);
         response.render("authors/list_authors", {layout: "authors_layout", authors: authors});
     });
@@ -43,13 +42,33 @@ router.get("/delete/:id", function(request, response, next) {
 });
 
 router.get("/edit/:id", function(request, response, next) {
-    databaseConnection("author")
-        .select("*", "author.id AS author_id")
-        .outerJoin("book_author", "author.id", "author_id")
-        .outerJoin("book", "book_id", "book.id")
-        .where("author.id", request.params.id)
-    .then(function(authors){
-        response.render("authors/edit_author", {layout: "authors_layout", author: authors[0]});
+    Promise.all([
+        databaseConnection("author")
+            .select("*", "author.id AS author_id")
+            .leftOuterJoin("book_author", "author.id", "author_id")
+            .leftOuterJoin("book", "book_id", "book.id")
+            .where("author.id", request.params.id),
+        databaseConnection("book").select()
+    ]).then(function(results){
+        var authors = mapBooksToAuthors(results[0]);
+        response.render("authors/edit_author", {layout: "authors_layout", author: authors[0], books: results[1]});
+    });
+});
+
+router.post("/:author_id/books", function(request, response, next) {
+    databaseConnection("book_author").insert({
+        book_id: parseInt(request.body.book_id),
+        author_id: parseInt(request.params.author_id)
+    }).then(function(){
+        response.redirect("/authors");
+    });
+});
+router.delete("/:author_id/books/:book_id", function(request, response, next) {
+    databaseConnection("book_author").delete().where({
+        book_id: parseInt(request.params.book_id),
+        author_id: parseInt(request.params.author_id)
+    }).then(function(){
+        response.redirect("/authors");
     });
 });
 
@@ -75,20 +94,20 @@ router.post("/", function(request, response, next) {
 });
 
 router.put("/:id", function(request, response, next) {
-    request.checkBody("title", "Title is empty or too long").notEmpty().isLength({max: 255});
-    request.checkBody("genre", "Genre is empty or too long").notEmpty().isLength({max: 255});
-    request.checkBody("description", "Description is missing or too long").notEmpty().isLength({max: 10000});
-    request.checkBody("cover_image_url", "Not a URL").isUrl(request.body.cover_url);
+    request.checkBody("first_name", "First name is empty or too long").notEmpty().isLength({max: 255});
+    request.checkBody("last_name", "Last name is empty or too long").notEmpty().isLength({max: 255});
+    request.checkBody("biography", "Biography is too long").isLength({max: 10000});
+    request.checkBody("portrait_url", "Not a URL").isUrl(request.body.portrait_url);
 
     var errors = request.validationErrors();
     if (errors){
         response.render("error", {errors: errors});
     } else {
         databaseConnection("author").update({
-            title: request.body.title,
-            genre: request.body.genre,
-            description: request.body.description,
-            cover_url: request.body.cover_image_url
+            first_name: request.body.first_name,
+            last_name: request.body.last_name,
+            biography: request.body.biography,
+            portrait_url: request.body.portrait_url
         }).where("id", request.params.id).then(function(){
             response.redirect("/authors");
         });
@@ -96,7 +115,6 @@ router.put("/:id", function(request, response, next) {
 });
 
 router.delete("/:id", function(request, response, next) {
-    console.log("got to delete");
     databaseConnection("author")
         .del()
         .where("id", request.params.id)
@@ -134,7 +152,7 @@ function mapBooksToAuthors(records){
 
 function extractBookFromRecord(record){
     return {
-        id: record.author_id,
+        id: record.book_id,
         title: record.title,
         description: record.description,
         cover_url: record.cover_url,
