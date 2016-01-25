@@ -2,31 +2,55 @@ var express = require("express");
 var router = express.Router();
 var databaseConnection = require("../database_connection");
 
+router.get("/new", function(request, response, next) {
+    response.render("books/add_book", {layout: "books_layout"});
+});
+
 router.get("/:id", function(request, response, next) {
-    databaseConnection("book").select().where("id", request.params.id).then(function(books){
-        response.render("get_book", {book: books[0]});
+    databaseConnection("book")
+        .select()
+        .innerJoin("book_author", "book.id", "book_id")
+        .innerJoin("author", "author_id", "author.id")
+        .where("book.id", request.params.id)
+    .then(function(books){
+        var books = mapAuthorsToBooks(books);
+        console.log(books[0]);
+        response.render("books/get_book", {layout: "books_layout", book: books[0]});
     });
 });
 
 router.get("/", function(request, response, next) {
-    databaseConnection("book").select().then(function(books){
-        response.render("list_books", {books: books});
+    databaseConnection("book")
+        .select()
+        .innerJoin("book_author", "book.id", "book_id")
+        .innerJoin("author", "author_id", "author.id")
+    .then(function(records){
+        var books = mapAuthorsToBooks(records);
+        response.render("books/list_books", {layout: "books_layout", books: books});
     });
 });
 
-router.get("/new", function(request, response, next) {
-    response.render("add_book");
-});
 
 router.get("/delete/:id", function(request, response, next) {
-    databaseConnection("book").select().where("id", request.params.id).then(function(books){
-        response.render("delete_book", {book: books[0]});
+    databaseConnection("book")
+        .select()
+        .innerJoin("book_author", "book.id", "book_id")
+        .innerJoin("author", "author_id", "author.id")
+        .where("book.id", request.params.id)
+    .then(function(books){
+        var books = mapAuthorsToBooks(books);
+        response.render("books/delete_book", {layout: "books_layout", book: books[0]});
     });
 });
 
 router.get("/edit/:id", function(request, response, next) {
-    databaseConnection("book").select().where("id", request.params.id).then(function(books){
-        response.render("edit_book", {book: books[0]});
+    databaseConnection("book")
+        .select()
+        .innerJoin("book_author", "book.id", "book_id")
+        .innerJoin("author", "author_id", "author.id")
+        .where("book.id", request.params.id)
+    .then(function(books){
+        response.render("books/edit_book", {layout: "books_layout", book: books[0]});
     });
 });
 
@@ -74,9 +98,65 @@ router.put("/:id", function(request, response, next) {
 
 router.delete("/:id", function(request, response, next) {
     console.log("got to delete");
-    databaseConnection("book").del().where("id", request.params.id).then(function(){
+    databaseConnection("book")
+        .del()
+        .where("id", request.params.id)
+    .then(function(){
         response.redirect("/books");
     });
 });
 
 module.exports = router;
+
+function mapAuthorsToBooks(records){
+    var mappedBooks = records.reduce(function(mappedBooks, currentRecord){
+        currentRecord = reassignBookIdToId(currentRecord);
+        var bookId = currentRecord.id
+
+        var author = extractAuthorFromRecord(currentRecord);
+        currentRecord = deleteAuthorFromRecord(currentRecord);
+
+        if (!mappedBooks.hasOwnProperty(bookId)){
+            currentRecord.authors = [author];
+            mappedBooks[bookId] = currentRecord;
+        } else {
+            mappedBooks[bookId].authors.push(author);
+        }
+
+        return mappedBooks;
+    }, {});
+
+    var books = [];
+    for (var bookId in mappedBooks){
+        books.push(mappedBooks[bookId]);
+    }
+    return books;
+}
+
+function extractAuthorFromRecord(record){
+    return {
+        id: record.author_id,
+        first_name: record.first_name,
+        last_name: record.last_name,
+        biography: record.biography,
+        portrait_url: record.portrait_url
+    };
+}
+
+function deleteAuthorFromRecord(record){
+    var properties = [
+        "author_id", "first_name", "last_name", "biography", "portrait_url"
+    ];
+
+    for (var i = 0, length = properties.length; i < length; i++){
+        delete record[properties[i]];
+    }
+
+    return record;
+}
+
+function reassignBookIdToId(record){
+    record.id = record.book_id;
+    delete record.book_id;
+    return record;
+}

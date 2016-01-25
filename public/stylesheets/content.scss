@@ -1,11 +1,11 @@
-.books {
+.books, .authors {
     margin-left: 4rem;
     padding: 1rem;
     h2 {
         @include header-text;
         margin-bottom: 1rem;
     }
-    .book {
+    .book, .author {
         display: flex;
         flex-flow: row wrap;
         &:not(:last-child) {
@@ -28,6 +28,31 @@
                     color: $darkest-color;
                     &:visited {
                         color: $lighter-color;
+                    }
+                }
+            }
+            .books, .authors {
+                margin-left: 0;
+                padding: 0;
+            }
+            .authors {
+                @include body-text;
+                max-width: 325px;
+                li {
+                    display: inline;
+                    &:not(:last-child):after {
+                        content: ", "
+                    }
+                }
+            }
+            .books {
+                @include body-text;
+                margin: 1rem 0;
+                padding: 0;
+                li {
+                    display: inline;
+                    &:not(:last-child):after {
+                        content: ", "
                     }
                 }
             }

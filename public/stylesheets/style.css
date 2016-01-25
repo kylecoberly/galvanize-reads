@@ -46,10 +46,15 @@ table {
   border-collapse: collapse;
   border-spacing: 0; }
 
+main {
+  min-height: 100vh;
+  padding-top: 65px;
+  margin-top: -65px; }
+
 form {
   font-family: Lora, serif;
   font-weight: 400;
-  font-color: #333;
+  color: #333;
   font-size: 1rem;
   padding: 1rem;
   max-width: 600px;
@@ -58,7 +63,7 @@ form {
   form h2 {
     font-family: Lora, serif;
     font-weight: 400;
-    font-color: #333;
+    color: #333;
     font-size: 2rem;
     margin-bottom: 1rem; }
   form input, form textarea {
@@ -70,7 +75,7 @@ form {
   form input[type=submit] {
     font-family: Lora, serif;
     font-weight: 700;
-    font-color: #333;
+    color: #333;
     font-size: 1rem;
     font-size: 2rem;
     background-color: #236467;
@@ -89,30 +94,67 @@ form {
     resize: none;
     height: 10rem; }
 
-main > nav {
-  margin: 1rem; }
-  main > nav li {
-    position: relative; }
-    main > nav li a {
-      display: inline-block;
-      width: 100%;
-      color: #333;
-      text-decoration: none;
-      text-align: center;
-      transition: background-color 0.3s; }
-      main > nav li a .icon, main > nav li a h2 {
-        display: block; }
-      main > nav li a .icon {
-        padding: 5rem 5rem;
-        font-size: 6rem; }
-      main > nav li a h2 {
-        font-family: Lora, serif;
-        font-weight: 400;
-        font-color: #333;
-        font-size: 2rem;
-        padding: 1rem; }
-      main > nav li a:hover {
-        background-color: #e6e6e6; }
+main {
+  display: flex;
+  flex-flow: row wrap; }
+  main > nav {
+    margin: 1rem; }
+    main > nav ul {
+      display: flex;
+      flex-flow: row wrap; }
+      main > nav ul li {
+        position: relative;
+        flex-grow: 1; }
+        main > nav ul li a {
+          display: inline-block;
+          width: 100%;
+          color: #333;
+          text-decoration: none;
+          text-align: center;
+          transition: background-color 0.3s; }
+          main > nav ul li a .icon, main > nav ul li a h2 {
+            display: block; }
+          main > nav ul li a .icon {
+            padding: 5rem 5rem;
+            font-size: 6rem; }
+          main > nav ul li a h2 {
+            font-family: Lora, serif;
+            font-weight: 400;
+            color: #333;
+            font-size: 2rem;
+            padding: 1rem; }
+          main > nav ul li a:hover {
+            background-color: #cccccc; }
+    main > nav.index-navigation {
+      width: 100%; }
+      main > nav.index-navigation ul {
+        display: flex;
+        flex-flow: row wrap; }
+        main > nav.index-navigation ul li {
+          position: relative;
+          flex-grow: 1; }
+          main > nav.index-navigation ul li .icon {
+            padding: 5rem 5rem;
+            font-size: 6rem; }
+    main > nav.side-navigation {
+      position: relative;
+      width: 125px;
+      max-height: 90vh; }
+      main > nav.side-navigation ul {
+        position: absolute;
+        height: 100%; }
+        main > nav.side-navigation ul li {
+          display: flex;
+          align-items: center; }
+          main > nav.side-navigation ul li .icon {
+            padding: 0;
+            font-size: 2rem; }
+          main > nav.side-navigation ul li a {
+            transform: rotate(270deg);
+            width: 100%;
+            padding: 1rem; }
+      main > nav.side-navigation .active {
+        background-color: #cccccc; }
 
 body > header {
   background-color: #162855;
@@ -127,55 +169,79 @@ body > header {
       display: inline-block;
       font-family: Lora, serif;
       font-weight: 700;
-      font-color: #fff;
+      color: #fff;
       font-size: 2rem;
       letter-spacing: -2px; }
 
-.books {
+.books, .authors {
   margin-left: 4rem;
   padding: 1rem; }
-  .books h2 {
+  .books h2, .authors h2 {
     font-family: Lora, serif;
     font-weight: 400;
-    font-color: #333;
+    color: #333;
     font-size: 2rem;
     margin-bottom: 1rem; }
-  .books .book {
+  .books .book, .books .author, .authors .book, .authors .author {
     display: flex;
     flex-flow: row wrap; }
-    .books .book:not(:last-child) {
+    .books .book:not(:last-child), .books .author:not(:last-child), .authors .book:not(:last-child), .authors .author:not(:last-child) {
       margin-bottom: 1rem; }
-    .books .book figure {
+    .books .book figure, .books .author figure, .authors .book figure, .authors .author figure {
       position: relative;
       max-width: 130px; }
-      .books .book figure img {
+      .books .book figure img, .books .author figure img, .authors .book figure img, .authors .author figure img {
         width: 100%; }
-    .books .book .details {
+    .books .book .details, .books .author .details, .authors .book .details, .authors .author .details {
       position: relative;
       max-width: 400px;
       margin-left: 1rem; }
-      .books .book .details h3 {
+      .books .book .details h3, .books .author .details h3, .authors .book .details h3, .authors .author .details h3 {
         font-family: Lora, serif;
         font-weight: 700;
-        font-color: #333;
+        color: #333;
         font-size: 1rem; }
-        .books .book .details h3 a {
+        .books .book .details h3 a, .books .author .details h3 a, .authors .book .details h3 a, .authors .author .details h3 a {
           color: #061539; }
-          .books .book .details h3 a:visited {
+          .books .book .details h3 a:visited, .books .author .details h3 a:visited, .authors .book .details h3 a:visited, .authors .author .details h3 a:visited {
             color: #7886AB; }
-      .books .book .details .genre {
+      .books .book .details .books, .books .book .details .authors, .books .author .details .books, .books .author .details .authors, .authors .book .details .books, .authors .book .details .authors, .authors .author .details .books, .authors .author .details .authors {
+        margin-left: 0;
+        padding: 0; }
+      .books .book .details .authors, .books .author .details .authors, .authors .book .details .authors, .authors .author .details .authors {
         font-family: Lora, serif;
         font-weight: 400;
-        font-color: #333;
+        color: #333;
+        font-size: 1rem;
+        max-width: 325px; }
+        .books .book .details .authors li, .books .author .details .authors li, .authors .book .details .authors li, .authors .author .details .authors li {
+          display: inline; }
+          .books .book .details .authors li:not(:last-child):after, .books .author .details .authors li:not(:last-child):after, .authors .book .details .authors li:not(:last-child):after, .authors .author .details .authors li:not(:last-child):after {
+            content: ", "; }
+      .books .book .details .books, .books .author .details .books, .authors .book .details .books, .authors .author .details .books {
+        font-family: Lora, serif;
+        font-weight: 400;
+        color: #333;
+        font-size: 1rem;
+        margin: 1rem 0;
+        padding: 0; }
+        .books .book .details .books li, .books .author .details .books li, .authors .book .details .books li, .authors .author .details .books li {
+          display: inline; }
+          .books .book .details .books li:not(:last-child):after, .books .author .details .books li:not(:last-child):after, .authors .book .details .books li:not(:last-child):after, .authors .author .details .books li:not(:last-child):after {
+            content: ", "; }
+      .books .book .details .genre, .books .author .details .genre, .authors .book .details .genre, .authors .author .details .genre {
+        font-family: Lora, serif;
+        font-weight: 400;
+        color: #333;
         font-size: 1rem;
         font-style: italic; }
-      .books .book .details p {
+      .books .book .details p, .books .author .details p, .authors .book .details p, .authors .author .details p {
         margin-top: 1rem;
         font-family: Lora, serif;
         font-weight: 400;
-        font-color: #333;
+        color: #333;
         font-size: 1rem; }
-      .books .book .details .actions {
+      .books .book .details .actions, .books .author .details .actions, .authors .book .details .actions, .authors .author .details .actions {
         position: absolute;
         top: 0;
         right: 0;
@@ -183,25 +249,25 @@ body > header {
         cursor: pointer;
         transform: scale(1);
         transition: transform 0.3s; }
-        .books .book .details .actions .delete:hover, .books .book .details .actions .edit:hover {
+        .books .book .details .actions .delete:hover, .books .book .details .actions .edit:hover, .books .author .details .actions .delete:hover, .books .author .details .actions .edit:hover, .authors .book .details .actions .delete:hover, .authors .book .details .actions .edit:hover, .authors .author .details .actions .delete:hover, .authors .author .details .actions .edit:hover {
           transform: scale(1.2); }
-        .books .book .details .actions .delete {
+        .books .book .details .actions .delete, .books .author .details .actions .delete, .authors .book .details .actions .delete, .authors .author .details .actions .delete {
           color: #b34d4d; }
-        .books .book .details .actions .edit {
+        .books .book .details .actions .edit, .books .author .details .actions .edit, .authors .book .details .actions .edit, .authors .author .details .actions .edit {
           color: #4F618E; }
-  .books .add {
+  .books .add, .authors .add {
     display: inline-block;
     padding: 2rem 3rem;
     background: #236467;
     font-family: Lora, serif;
     font-weight: 700;
-    font-color: #333;
+    color: #333;
     font-size: 1rem;
     font-size: 2rem;
     text-decoration: none;
     color: #fff;
     transition: background-color 0.3s; }
-    .books .add:hover {
+    .books .add:hover, .authors .add:hover {
       background-color: #30898d; }
 
 /*# sourceMappingURL=style.css.map */

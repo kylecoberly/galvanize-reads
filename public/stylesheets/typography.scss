@@ -3,7 +3,7 @@
 @mixin primary-header-text {
     font-family: Lora, serif;
     font-weight: 700;
-    font-color: $white;
+    color: $white;
     font-size: 2rem;
     letter-spacing: -2px;
 }
@@ -11,20 +11,20 @@
 @mixin header-text {
     font-family: Lora, serif;
     font-weight: 400;
-    font-color: $black;
+    color: $black;
     font-size: 2rem;
 }
 
 @mixin subheader-text {
     font-family: Lora, serif;
     font-weight: 700;
-    font-color: $black;
+    color: $black;
     font-size: 1rem;
 }
 
 @mixin body-text {
     font-family: Lora, serif;
     font-weight: 400;
-    font-color: $black;
+    color: $black;
     font-size: 1rem;
 }

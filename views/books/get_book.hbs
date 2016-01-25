@@ -5,6 +5,11 @@
         </figure>
         <div class="details">
             <h3>{{book.title}}</h3>
+            <ul class="authors">
+                {{#each book.authors}}
+                    <li>{{first_name}} {{last_name}}</li>
+                {{/each}}
+            </ul>
             <span class="genre">{{book.genre}}</span>
             <p>{{book.description}}</p>
             <div class="actions">

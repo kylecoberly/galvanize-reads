@@ -8,6 +8,11 @@
                 </figure>
                 <div class="details">
                     <h3><a href="/books/{{id}}">{{title}}</a></h3>
+                    <ul class="authors">
+                        {{#each authors}}
+                            <li>{{first_name}} {{last_name}}</li>
+                        {{/each}}
+                    </ul>
                     <span class="genre">{{genre}}</span>
                     <p>{{description}}</p>
                     <div class="actions">
