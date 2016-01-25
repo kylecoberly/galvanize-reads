@@ -11,7 +11,7 @@
                 <h3>Books</h3>
                 <ul>
                     {{#each author.books}}
-                        <li class="book">{{title}}</li>
+                        <li class="book"><a href="/books/{{id}}">{{title}}</a></li>
                     {{/each}}
                 </ul>
             </div>
