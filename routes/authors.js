@@ -14,7 +14,7 @@ router.get("/:id", function(request, response, next) {
         .where("author.id", request.params.id)
     .then(function(authors){
         var authors = mapBooksToAuthors(authors);
-        response.render("authors/get_author", {layouts: "authors_layout", author: authors[0]});
+        response.render("authors/get_author", {layout: "authors_layout", author: authors[0]});
     });
 });
 
